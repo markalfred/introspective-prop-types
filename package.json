@@ -3,13 +3,25 @@
   "version": "0.0.1",
   "description": "introspective-prop-types",
   "license": "MIT",
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markalfred/introspective-prop-types.git"
+  },
+  "bugs": {
+    "url": "https://github.com/markalfred/introspective-prop-types/issues"
+  },
+  "homepage": "https://github.com/markalfred/introspective-prop-types",
   "author": {
     "name": "Mark Battersby",
     "email": "mark.alfred.battersby@gmail.com"
   },
   "keywords": [
-    ""
+    "react",
+    "prop",
+    "props",
+    "proptypes",
+    "metadata",
+    "introspection"
   ],
   "files": [
     "lib"
