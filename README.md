@@ -10,7 +10,7 @@ PropTypes.oneOf([1, 2, 3]).arg  // => [1, 2, 3]
 ```
 
 
-[![Build Status](https://travis-ci.org/markalfred/introspective-prop-types.svg?branch=master)](https://travis-ci.org/markalfred/introspective-prop-types.svg?branch=master)
+[![Build Status](https://api.travis-ci.org/markalfred/introspective-prop-types.svg?branch=master)](https://api.travis-ci.org/markalfred/introspective-prop-types.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/markalfred/introspective-prop-types/badge.svg?branch=master)](https://coveralls.io/github/markalfred/introspective-prop-types?branch=master)
 [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
