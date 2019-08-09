@@ -46,3 +46,8 @@ propTypes.color.arg         // => ['red', 'green', 'blue']
 propTypes.car.type          // => 'shape'
 propTypes.car.arg.year.type // => 'number'
 ```
+
+This is a drop-in replacement for [`facebook/prop-types`](https://github.com/facebook/prop-types).
+
+You can replace any `prop-types` import with `introspective-prop-types` and get
+prop types with metadata. :beers:
