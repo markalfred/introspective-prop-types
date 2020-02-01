@@ -49,10 +49,10 @@
     "@types/node": "^13.1.2",
     "@types/prop-types": "^15.7.1",
     "coveralls": "^3.0.2",
-    "jest": "^24.8.0",
+    "jest": "^25.1.0",
     "prettier": "^1.14.3",
     "rimraf": "^3.0.0",
-    "ts-jest": "^24.0.2",
+    "ts-jest": "^25.1.0",
     "ts-node": "^8.3.0",
     "typescript": "^3.1.1"
   },
