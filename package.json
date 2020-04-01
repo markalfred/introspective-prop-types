@@ -50,7 +50,7 @@
     "@types/prop-types": "^15.7.1",
     "coveralls": "^3.0.2",
     "jest": "^25.1.0",
-    "prettier": "^1.14.3",
+    "prettier": "^2.0.2",
     "rimraf": "^3.0.0",
     "ts-jest": "^25.1.0",
     "ts-node": "^8.3.0",
