@@ -41,7 +41,8 @@
   },
   "dependencies": {
     "lodash": "^4.17.15",
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "prop-types-extra": "^1.1.1"
   },
   "devDependencies": {
     "@types/jest": "^25.1.1",
