@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import { bool } from 'prop-types'
 import IntrospectivePropTypesExtra from '../src/introspective-prop-types-extra'
 
 function check(
@@ -74,10 +74,7 @@ it('PropType still functions correctly', () => {
   const errorBackup = console.error
   console.error = jest.fn()
 
-  const propType = IntrospectivePropTypesExtra.deprecated(
-    PropTypes.bool,
-    'just a test',
-  )
+  const propType = IntrospectivePropTypesExtra.deprecated(bool, 'just a test')
 
   propType({}, 'show', 'SomeWidget', 'prop', 'show', secret)
   expect(console.error).toHaveBeenCalledTimes(0)
