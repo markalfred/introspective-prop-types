@@ -7,23 +7,15 @@ import { addArg, addRequired, addType } from './common'
 type Simple = 'elementType' | 'componentOrElement'
 type Complex = 'all' | 'isRequiredForA11y' | 'deprecated'
 type Types = Simple | Complex
+type PropType = typeof PropTypesExtra[keyof typeof PropTypesExtra]
 
 // Circular reference. Return original.
 function wrapPropTypeExtra<T>(propType: T, name: 'PropTypesExtra'): T
 // Simple. Return original with added properties.
-function wrapPropTypeExtra<T extends PropTypesExtra>(
-  propType: T,
-  name: Simple,
-): T
+function wrapPropTypeExtra<T extends PropType>(propType: T, name: Simple): T
 // Complex. Return original-looking function with added functionality in call.
-function wrapPropTypeExtra<T extends PropTypesExtra>(
-  propType: T,
-  name: Complex,
-): T
-function wrapPropTypeExtra<T extends PropTypesExtra>(
-  propType: T,
-  name: Types,
-): T
+function wrapPropTypeExtra<T extends PropType>(propType: T, name: Complex): T
+function wrapPropTypeExtra<T extends PropType>(propType: T, name: Types): T
 function wrapPropTypeExtra(propType: any, name: any): any {
   if (propType.isRequired !== undefined) {
     // Simple type. Just extend the object.
