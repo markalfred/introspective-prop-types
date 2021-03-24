@@ -41,13 +41,13 @@ function wrapPropTypeExtra(propType: any, name: any): any {
     return res
   } else {
     // Complex type. Must extend the creator's return value.
-    const original = (a: any) => propType(a)
+    const original = (...args: any[]) => propType(...args)
     return <T>(
-      arg: T,
+      ...args: T[]
     ): { isRequired: any; type: string; arg: T; required: boolean } => {
-      let res = original(arg)
+      let res = original(...args)
       res = addType(res, name)
-      res = addArg(res, arg)
+      res = addArg(res, args)
       res = addRequired(res)
       return res
     }

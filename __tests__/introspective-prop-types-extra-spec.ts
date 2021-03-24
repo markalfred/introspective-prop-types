@@ -1,11 +1,8 @@
-import { PropTypes, PropTypesExtra } from '../src/index'
+import PropTypes from 'prop-types'
 import IntrospectivePropTypesExtra from '../src/introspective-prop-types-extra'
 
-function check(
-  type: string,
-  arg?: string | string[] | (() => void) | (() => void)[],
-): void {
-  if (!arg) {
+function check(type: string, ...args: any[]): void {
+  if (!args.length) {
     const propType = IntrospectivePropTypesExtra[type]
     it('exposes its type', () => {
       expect(propType.type).toBe(type)
@@ -29,12 +26,12 @@ function check(
       })
     })
   } else {
-    const propType = IntrospectivePropTypesExtra[type](arg)
+    const propType = IntrospectivePropTypesExtra[type](...args)
     it('exposes its type', () => {
       expect(propType.type).toBe(type)
     })
     it('exposes its arg', () => {
-      expect(propType.arg).toBe(arg)
+      expect(propType.arg).toStrictEqual(args)
     })
     it('exposes that it is not required', () => {
       expect(propType.required).toBe(false)
@@ -46,7 +43,7 @@ function check(
           expect(requiredPropType.type).toBe(type)
         })
         it('exposes its arg', () => {
-          expect(requiredPropType.arg).toBe(arg)
+          expect(requiredPropType.arg).toStrictEqual(args)
         })
         it('exposes that it is required', () => {
           expect(requiredPropType.required).toBe(true)
@@ -58,24 +55,34 @@ function check(
 
 describe('elementType', () => check('elementType'))
 describe('componentOrElement', () => check('componentOrElement'))
-describe('all', () => check('all', [function fn1() {}, function fn2() {}]))
-
-describe('deprecated', () => check('deprecated', function fn() {}))
-
+describe('all', () =>
+  check(
+    'all',
+    function fn1() {},
+    function fn2() {},
+  ))
+describe('deprecated', () => check('deprecated', function fn() {}, 'test'))
 describe('isRequiredForA11y', () =>
-  check('isRequiredForA11y', [function fn() {}]))
+  check('isRequiredForA11y', function fn() {}))
 
 const secret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED'
 
-it('supports unchained propTypes', () => {
-  const propType = PropTypesExtra.deprecated(PropTypes.bool, 'just a test')
-  propType(
-    { show: true },
-    'show',
-    'SomeWidget',
-    'stuff in your code',
-    'show',
-    secret,
+it('PropType still functions correctly', () => {
+  const errorBackup = console.error
+  console.error = jest.fn()
+
+  const propType = IntrospectivePropTypesExtra.deprecated(
+    PropTypes.bool,
+    'just a test',
   )
-  propType({}, 'show', 'SomeWidget', 'stuff in your code', 'show', secret)
+
+  propType({}, 'show', 'SomeWidget', 'prop', 'show', secret)
+  expect(console.error).toHaveBeenCalledTimes(0)
+  propType({ show: true }, 'show', 'SomeWidget', 'prop', 'show', secret)
+  expect(console.error).toHaveBeenCalledTimes(1)
+  expect(console.error).toHaveBeenCalledWith(
+    'Warning: The prop `show` of `SomeWidget` is deprecated. just a test.',
+  )
+
+  console.error = errorBackup
 })
