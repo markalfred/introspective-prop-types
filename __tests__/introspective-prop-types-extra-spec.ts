@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types'
 import IntrospectivePropTypesExtra from '../src/introspective-prop-types-extra'
 
-function check(type: string, ...args: any[]): void {
+function check(
+  type: keyof typeof IntrospectivePropTypesExtra,
+  ...args: Array<string | (() => void)>
+): void {
   if (!args.length) {
     const propType = IntrospectivePropTypesExtra[type]
     it('exposes its type', () => {

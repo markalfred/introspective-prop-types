@@ -1,4 +1,3 @@
-// @ts-ignore
 import * as PropTypesExtra from 'prop-types-extra'
 import cloneDeep from 'lodash/cloneDeep'
 import mapValues from 'lodash/mapValues'
