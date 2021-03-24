@@ -51,3 +51,9 @@ This is a drop-in replacement for [`facebook/prop-types`](https://github.com/fac
 
 You can replace any `prop-types` import with `introspective-prop-types` and get
 prop types with metadata. :beers:
+
+## Additional prop-type libraries
+This package adds metadata to the following additional libraries. Just replace your current imports with their introspective version.
+- [`react-bootstrap/prop-types-extra`](https://github.com/react-bootstrap/prop-types-extra): `import PropTypesExtra from 'introspective-prop-types/extra'`
+
+If you'd like metadata in any other prop-type libraries, please [submit an issue](https://github.com/markalfred/introspective-prop-types/issues).
