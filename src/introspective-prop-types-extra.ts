@@ -1,6 +1,5 @@
 // @ts-ignore
 import * as PropTypesExtra from 'prop-types-extra'
-import createChainableTypeChecker from './createChainableTypeChecker'
 import cloneDeep from 'lodash/cloneDeep'
 import mapValues from 'lodash/mapValues'
 import { addArg, addRequired, addType } from './common'
@@ -47,17 +46,7 @@ function wrapPropTypeExtra(propType: any, name: any): any {
       arg: T,
     ): { isRequired: any; type: string; arg: T; required: boolean } => {
       let res = original(arg)
-      try {
-        res = addType(res, name)
-      } catch (e) {
-        // exception is raised when validator is a pure function
-        /* istanbul ignore else */
-        if (e.message === 'Object.defineProperty called on non-object') {
-          res = createChainableTypeChecker(res)
-          res = addType(res, name)
-        } else
-            throw e
-      }
+      res = addType(res, name)
       res = addArg(res, arg)
       res = addRequired(res)
       return res

@@ -39,18 +39,20 @@ function check(
     it('exposes that it is not required', () => {
       expect(propType.required).toBe(false)
     })
-    describe('.isRequired', () => {
-      const requiredPropType = propType.isRequired
-      it('exposes its type', () => {
-        expect(requiredPropType.type).toBe(type)
+    if (propType.isRequired) {
+      describe('.isRequired', () => {
+        const requiredPropType = propType.isRequired
+        it('exposes its type', () => {
+          expect(requiredPropType.type).toBe(type)
+        })
+        it('exposes its arg', () => {
+          expect(requiredPropType.arg).toBe(arg)
+        })
+        it('exposes that it is required', () => {
+          expect(requiredPropType.required).toBe(true)
+        })
       })
-      it('exposes its arg', () => {
-        expect(requiredPropType.arg).toBe(arg)
-      })
-      it('exposes that it is required', () => {
-        expect(requiredPropType.required).toBe(true)
-      })
-    })
+    }
   }
 }
 
@@ -63,12 +65,17 @@ describe('deprecated', () => check('deprecated', function fn() {}))
 describe('isRequiredForA11y', () =>
   check('isRequiredForA11y', [function fn() {}]))
 
-const secret = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
+const secret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED'
 
 it('supports unchained propTypes', () => {
-  const propType = PropTypesExtra.deprecated(PropTypes.bool, "just a test")
-  propType({ show: true }, "show", "SomeWidget", "stuff in your code", "show", secret);
-  propType({ }, "show", "SomeWidget", "stuff in your code", "show", secret);
-  propType.isRequired({ show: true }, "show", "SomeWidget", "stuff in your code", "show", secret);
-  propType.isRequired({ }, "show", "SomeWidget", "stuff in your code", "show", secret);
+  const propType = PropTypesExtra.deprecated(PropTypes.bool, 'just a test')
+  propType(
+    { show: true },
+    'show',
+    'SomeWidget',
+    'stuff in your code',
+    'show',
+    secret,
+  )
+  propType({}, 'show', 'SomeWidget', 'stuff in your code', 'show', secret)
 })

@@ -10,7 +10,9 @@ function addHiddenProperties<T extends Check>(
   value: any,
 ): WithProperty<T> {
   addHiddenProperty(propType, property, value)
-  addHiddenProperty(propType.isRequired, property, value)
+  if (propType.isRequired) {
+    addHiddenProperty(propType.isRequired, property, value)
+  }
   return propType
 }
 
@@ -38,6 +40,8 @@ export function addArg<T extends Check>(
 
 export function addRequired<T extends Check>(propType: T): WithProperty<T> {
   addHiddenProperty(propType, 'required', false)
-  addHiddenProperty(propType.isRequired, 'required', true)
+  if (propType.isRequired) {
+    addHiddenProperty(propType.isRequired, 'required', true)
+  }
   return propType
 }
