@@ -5,6 +5,7 @@ import omit = require('lodash/omit')
 // @ts-ignore: "No exported module" error
 // PropTypes is a circular reference and therefore not defined in types
 import { PropTypes as NamedPT } from 'prop-types'
+// @ts-ignore: "No exported module" error
 // import * as NamedPT from 'prop-types'
 import { IntrospectivePropTypes as NamedIPT } from '../src/index'
 
@@ -17,6 +18,7 @@ const ES5PT = require('prop-types')
 const ES5IPT = require('../src/index')
 
 const noise = ['IntrospectivePropTypes', 'default']
+
 function checkProperties(obj1: object, obj2: object): void {
   each(keys(omit(obj1, noise)), expect(obj2).toHaveProperty)
   each(keys(omit(obj2, noise)), expect(obj1).toHaveProperty)
