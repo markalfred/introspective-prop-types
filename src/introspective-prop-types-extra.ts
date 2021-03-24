@@ -1,38 +1,20 @@
-// @ts-ignore
 import * as PropTypesExtra from 'prop-types-extra'
 import cloneDeep from 'lodash/cloneDeep'
 import mapValues from 'lodash/mapValues'
 import { addArg, addRequired, addType } from './common'
 
-type Noise = 'checkPropTypes' | 'resetWarningCache' | 'nominalTypeHack'
-
 type Simple = 'elementType' | 'componentOrElement'
-
 type Complex = 'all' | 'isRequiredForA11y' | 'deprecated'
-
-type Types = Noise | Simple | Complex
+type Types = Simple | Complex
+type PropType = typeof PropTypesExtra[keyof typeof PropTypesExtra]
 
 // Circular reference. Return original.
 function wrapPropTypeExtra<T>(propType: T, name: 'PropTypesExtra'): T
-// Noise. Return original.
-function wrapPropTypeExtra<T extends PropTypesExtra>(
-  propType: T,
-  name: Noise,
-): T
 // Simple. Return original with added properties.
-function wrapPropTypeExtra<T extends PropTypesExtra>(
-  propType: T,
-  name: Simple,
-): T
+function wrapPropTypeExtra<T extends PropType>(propType: T, name: Simple): T
 // Complex. Return original-looking function with added functionality in call.
-function wrapPropTypeExtra<T extends PropTypesExtra>(
-  propType: T,
-  name: Complex,
-): T
-function wrapPropTypeExtra<T extends PropTypesExtra>(
-  propType: T,
-  name: Types,
-): T
+function wrapPropTypeExtra<T extends PropType>(propType: T, name: Complex): T
+function wrapPropTypeExtra<T extends PropType>(propType: T, name: Types): T
 function wrapPropTypeExtra(propType: any, name: any): any {
   if (propType.isRequired !== undefined) {
     // Simple type. Just extend the object.
