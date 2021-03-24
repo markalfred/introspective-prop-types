@@ -4,21 +4,12 @@ import cloneDeep from 'lodash/cloneDeep'
 import mapValues from 'lodash/mapValues'
 import { addArg, addRequired, addType } from './common'
 
-type Noise = 'checkPropTypes' | 'resetWarningCache' | 'nominalTypeHack'
-
 type Simple = 'elementType' | 'componentOrElement'
-
 type Complex = 'all' | 'isRequiredForA11y' | 'deprecated'
-
-type Types = Noise | Simple | Complex
+type Types = Simple | Complex
 
 // Circular reference. Return original.
 function wrapPropTypeExtra<T>(propType: T, name: 'PropTypesExtra'): T
-// Noise. Return original.
-function wrapPropTypeExtra<T extends PropTypesExtra>(
-  propType: T,
-  name: Noise,
-): T
 // Simple. Return original with added properties.
 function wrapPropTypeExtra<T extends PropTypesExtra>(
   propType: T,
